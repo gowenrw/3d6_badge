@@ -30,5 +30,3 @@ To update it to a newer commit after its been added use this cmd:
 ```
 git submodule update --recursive
 ```
-
-Note: The template sets up the initial KiCad project folder and files with a name altbier_pcb_1970dec so replace 1970dec to rename the KiCad project.
