@@ -501,19 +501,19 @@ GND
 Wire Wire Line
 	9100 2100 8900 2100
 Text GLabel 10100 1000 2    50   Input ~ 0
-P1.6
+P1.5
 Text GLabel 10100 1550 2    50   Input ~ 0
-P1.5
+P1.4
 Text GLabel 10100 2100 2    50   Input ~ 0
-P1.4
-Text GLabel 8300 1550 2    50   Input ~ 0
 P3.2
-Text GLabel 6500 2100 2    50   Input ~ 0
+Text GLabel 8300 1550 2    50   Input ~ 0
 P1.6
-Text GLabel 6500 1550 2    50   Input ~ 0
+Text GLabel 6500 2100 2    50   Input ~ 0
 P1.5
-Text GLabel 6500 1000 2    50   Input ~ 0
+Text GLabel 6500 1550 2    50   Input ~ 0
 P1.4
+Text GLabel 6500 1000 2    50   Input ~ 0
+P3.2
 Wire Wire Line
 	6500 1000 6300 1000
 Wire Wire Line
@@ -997,19 +997,19 @@ GND
 Wire Wire Line
 	9100 5900 8900 5900
 Text GLabel 10100 4800 2    50   Input ~ 0
-P1.6
+D+
 Text GLabel 10100 5350 2    50   Input ~ 0
-P1.5
+P3.4
 Text GLabel 10100 5900 2    50   Input ~ 0
-P1.4
+P3.3
 Text GLabel 8300 5350 2    50   Input ~ 0
-P3.2
+D-
 Text GLabel 6500 5900 2    50   Input ~ 0
-P1.6
+D+
 Text GLabel 6500 5350 2    50   Input ~ 0
-P1.5
+P3.4
 Text GLabel 6500 4800 2    50   Input ~ 0
-P1.4
+P3.3
 Wire Wire Line
 	6500 4800 6300 4800
 Wire Wire Line
