@@ -44,6 +44,10 @@ SBIT(LED11, 0x90, LED11_PIN);
 void main() {
     CfgFsys();
 
+    // USB UDP/UDM I/O pin enable: 0=P3.6/P3.7 as GPIO, 1=P3.6/P3.7 as USB
+    // Clear this bit to use D+/D- as GPIO 3.6/3.7
+    PIN_FUNC &= ~bUSB_IO_EN;
+
     P3_DIR_PU &= 0x0C;
     // Configure pin 3.0 as GPIO output
     P3_MOD_OC = P3_MOD_OC & ~(1<<LED30_PIN);
