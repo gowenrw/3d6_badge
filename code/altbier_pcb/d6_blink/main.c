@@ -91,9 +91,7 @@ void main() {
     while (1) {
       // ALL OFF
       LED11 = 0, LED14 = 0, LED15 = 0, LED16 = 0, LED17 = 0;
-      // LED14 = 0, LED15 = 0, LED16 = 0, LED17 = 0;
       LED30 = 0, LED31 = 0, LED32 = 0, LED33 = 0, LED34 = 0, LED36 = 0, LED37 = 0;
-      // LED30 = 0, LED31 = 0, LED32 = 0, LED33 = 0;
 
       // Blink Die count
       // 1 = LED16 | LED11 | LED37
@@ -102,6 +100,8 @@ void main() {
       // 4 = LED15 & LED32 | LED30 & LED17 | LED36 & LED33
       // 5 = LED15 & LED16 & LED32 | LED30 & LED11 & LED17 | LED36 & LED37 & LED33
       // 6 = LED14 & LED15 & LED32 | LED31 & LED30 & LED17 | LED34 & LED36 & LED33
+
+      // Test code to blink all 3 dice from 1 to 6
       mDelaymS(300);
       LED16 = 1, LED11 = 1, LED37 = 1;
       mDelaymS(300);
