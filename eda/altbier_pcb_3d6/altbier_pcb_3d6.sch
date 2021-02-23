@@ -118,7 +118,7 @@ P3.4
 Text Notes 2700 3400 0    50   ~ 0
 SW1 switches between USB and BAT power.\nThis prevents an over voltage if both are connected.\nNote pins 1 and 3 can be swapped per pcb layout
 Text Notes 2700 3750 0    50   ~ 0
-SW2 applies a pull up resistor R1 on D+\nPress and hold SW2 while USB is connected\nto put IC1 into programming mode.
+SW2 applies a pull up resistor R2 on D+\nPress and hold SW2 while USB is connected\nto put IC1 into programming mode.
 Text Notes 2700 4050 0    50   ~ 0
 C1 and C2 provide decoupling (noise suppression)\non V33 and VCC respectivley
 Wire Wire Line
@@ -203,7 +203,7 @@ Wire Notes Line
 	4800 550  600  550 
 Wire Notes Line
 	600  550  600  4950
-Text GLabel 2200 5550 0    50   Input ~ 0
+Text GLabel 1150 5550 0    50   Input ~ 0
 RST
 $Comp
 L 0_local:SW_SPDT_C136659 SW1
@@ -231,34 +231,17 @@ F 7 "TS2306A-240GF-MSM-9_C388290" H 2350 3400 50  0001 C CNN "Manufacturer_Part_
 	1    2050 4100
 	0    -1   -1   0   
 $EndComp
-$Comp
-L 0_local:SW_TS2306A S11
-U 1 1 5E828178
-P 2450 5550
-F 0 "S11" H 2750 5815 50  0000 C CNN
-F 1 "SW_TS2306A" H 2750 5724 50  0000 C CNN
-F 2 "0_local:SW_TS2306A240GFMSM9_C388290" H 2750 5350 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/1904241742_SHOU-HAN-TS2306A-240gf-MSM-9_C388290.pdf" H 2750 5250 50  0001 C CNN
-F 4 "Tactile Switches SPST 3.00mm x 2.00mm 0.60mm 10mA @ 5VDC SMD RoHS" H 2750 5150 50  0001 C CNN "Description"
-F 5 "1" H 2750 5050 50  0001 C CNN "Height"
-F 6 "Shou Han" H 2750 4950 50  0001 C CNN "Manufacturer_Name"
-F 7 "TS2306A-240GF-MSM-9_C388290" H 2750 4850 50  0001 C CNN "Manufacturer_Part_Number"
-	1    2450 5550
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
-	2200 5550 2450 5550
+	1150 5550 1400 5550
 Wire Wire Line
-	3050 5550 3300 5550
-Text GLabel 3300 5550 2    50   Input ~ 0
-GND
-Text Notes 2100 6000 0    50   ~ 0
-SW11 will be used by code on the IC\nto allow for different subroutines to\nbe activated via tactile switch
+	2000 5550 2250 5550
+Text Notes 1200 6250 0    59   ~ 0
+SW3 will be used to reboot the IC \nwhich is the only way I can see to \nhave a 'roll dice' button given all \nthe other GPIO pins are used.
 $Comp
-L 0_local:R_0805 R1
+L 0_local:R_0805 R2
 U 1 1 602B2DC6
 P 2050 3200
-F 0 "R1" H 2120 3291 50  0000 L CNN
+F 0 "R2" H 2120 3291 50  0000 L CNN
 F 1 "10k Ohms" H 2120 3200 50  0000 L CNN
 F 2 "0_local:R_0805_2012Metric" V 2180 3150 50  0001 C CNN
 F 3 "~" H 2000 3200 50  0001 C CNN
@@ -536,7 +519,7 @@ Wire Notes Line
 	10400 2350 10400 550 
 Wire Notes Line
 	10400 550  4900 550 
-Text Notes 7550 750  0    50   ~ 10
+Text Notes 7450 750  0    79   ~ 16
 First d6
 $Comp
 L 0_local:LED_0805 D21
@@ -784,7 +767,7 @@ Wire Notes Line
 	10400 4250 10400 2450
 Wire Notes Line
 	10400 2450 4900 2450
-Text Notes 7550 2650 0    50   ~ 10
+Text Notes 7400 2650 0    79   ~ 16
 Second d6
 $Comp
 L 0_local:LED_0805 D31
@@ -1032,8 +1015,80 @@ Wire Notes Line
 	10400 6150 10400 4350
 Wire Notes Line
 	10400 4350 4900 4350
-Text Notes 7550 4550 0    50   ~ 10
+Text Notes 7450 4550 0    79   ~ 16
 Third d6
-Text Notes 2100 7300 0    59   ~ 12
-Dice/LED |-7-|1&2|3&4|5&6\n1        |-X-|---|---|---\n2        |---|---|---|-X-\n3        |-X-|-X-|---|---\n4        |---|-X-|---|-X-\n5        |-X-|-X-|---|-X-\n6        |---|-X-|-X-|-X-
+Text Notes 3550 7800 0    79   ~ 16
+Four pins will control each die as follows:\n  (X = ON/HIGH, o = OFF/LOW)\n\nDice/LED|-7-|1&2|3&4|5&6\n1        |-X-|-o-|-o-|-o-\n2        |-o-|-o-|-o-|-X-\n3        |-X-|-X-|-o-|-o-\n4        |-o-|-X-|-o-|-X-\n5        |-X-|-X-|-o-|-X-\n6        |-o-|-X-|-X-|-X-
+Text GLabel 2800 5550 2    50   Input ~ 0
+V33
+$Comp
+L 0_local:R_0805 R3
+U 1 1 6037278F
+P 2400 5550
+F 0 "R3" V 2697 5550 50  0000 C CNN
+F 1 "10k Ohms" V 2606 5550 50  0000 C CNN
+F 2 "0_local:R_0805_2012Metric" V 2530 5500 50  0001 C CNN
+F 3 "~" H 2350 5550 50  0001 C CNN
+F 4 "0805" V 2515 5550 50  0000 C CNN "Form"
+	1    2400 5550
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2550 5550 2800 5550
+Text Notes 1200 7200 0    59   ~ 0
+Note on D+ and D- in this design:\nThese are normally assigned as USB pins\nso in the code you will need to clear\nthe bit named bUSB_IO_EN\nThis will allow thier use as GPIO pins
+Text Notes 5850 4950 0    79   ~ 16
+1
+Text Notes 5850 5500 0    79   ~ 16
+3
+Text Notes 5850 6050 0    79   ~ 16
+5
+Text Notes 9450 4950 0    79   ~ 16
+6
+Text Notes 9450 5500 0    79   ~ 16
+4
+Text Notes 9450 6050 0    79   ~ 16
+2
+Text Notes 7650 5500 0    79   ~ 16
+7
+Text Notes 5850 3050 0    79   ~ 16
+1
+Text Notes 5850 3600 0    79   ~ 16
+3
+Text Notes 5850 4150 0    79   ~ 16
+5
+Text Notes 7650 3600 0    79   ~ 16
+7
+Text Notes 9450 3050 0    79   ~ 16
+6
+Text Notes 9450 3600 0    79   ~ 16
+4
+Text Notes 9450 4150 0    79   ~ 16
+2
+Text Notes 5850 1150 0    79   ~ 16
+1
+Text Notes 5850 1700 0    79   ~ 16
+3
+Text Notes 5850 2250 0    79   ~ 16
+5
+Text Notes 7650 1700 0    79   ~ 16
+7
+Text Notes 9450 1150 0    79   ~ 16
+6
+Text Notes 9450 1700 0    79   ~ 16
+4
+Text Notes 9450 2250 0    79   ~ 16
+2
+$Comp
+L 0_local:SW_Push_SPST_4pin SW3
+U 1 1 603712D3
+P 1700 5650
+F 0 "SW3" H 1700 6070 50  0000 C CNN
+F 1 "SW_Push_SPST_4pin" H 1700 5980 50  0000 C CNN
+F 2 "0_local:SW_TS3735PA250GF" H 1700 5350 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/1905211532_SHOU-HAN-3-7-3-7-0-35-SKRWAEE030_C393946.pdf" H 1700 5350 50  0001 C CNN
+F 4 "TS3735PA_250GF" H 1700 5890 50  0000 C CNN "Model"
+	1    1700 5650
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

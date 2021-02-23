@@ -162,6 +162,12 @@ K switch normally-open pushbutton push-button
 F https://datasheet.lcsc.com/szlcsc/1905211531_SHOU-HAN-TS665CJ_C393938.pdf
 $ENDCMP
 #
+$CMP SW_Push_SPST_4pin
+D Push button switch 4pin TS3735PA_250GF Tactile Switches SPST
+K switch normally-open pushbutton push-button Tactile SPST
+F https://datasheet.lcsc.com/szlcsc/1905211532_SHOU-HAN-3-7-3-7-0-35-SKRWAEE030_C393946.pdf
+$ENDCMP
+#
 $CMP SW_SPDT_C136659
 D Switch, single pole double throw
 K switch single-pole double-throw spdt ON-ON
