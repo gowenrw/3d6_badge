@@ -1,4 +1,3 @@
-
 /*******************************************************************************
 * Function Name  : WriteDataFlash(UINT8 Addr, PUINT8 buf, UINT8 len)
 * Description    : DataFlash Write

@@ -1,4 +1,4 @@
-TARGET = d6blink
+TARGET = d6count
 
 C_FILES = \
 	main.c \
