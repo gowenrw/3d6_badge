@@ -1,8 +1,16 @@
 /* *************************************************************************
 * File Name          : 3d6_roll/main.c
 * Author             : @alt_bier
-* Date               : 2021/02/24
+* Date               : 2021/03/15
 * Description        : Roll 3 six sided dice using pseudo random numbers
+* Note on Random Seed: Without a real clock source or available analog pin
+*                      we just read/write seed from flash.  So to prevent
+*                      all devices having the same roll pattern you will
+*                      need to manually set the initial seed random value
+*                      in flash (bytes 0x001 and 0x002) on each firmware
+*                      load since firmware load erases flash
+*                      This could lead to some fun cheating recording the
+*                      roll patterns of seeds to reset to before playing
 ************************************************************************* */
 #include <ch552.h>
 #include <debug.h>
@@ -34,10 +42,11 @@ SBIT(LED11, 0x90, 1);  // Physical Pin 9
 UINT8 d6value[3];
 
 // define vars for data flash
-UINT8 addrn, lenn, buffn;
+UINT8 addrn, lenn, buffn[2];
 
 // define other main loop vars
 UINT8 i, randomdie;
+UINT16 seed;
 
 void alloff() {
   // TURN ALL LEDS OFF
@@ -139,12 +148,16 @@ void main() {
     CfgFsys();
 
     // Read seed from data flash
-    addrn = 8, lenn = 1;
-    ReadDataFlash(addrn,lenn,&buffn);
+    addrn = 1, lenn = 2, seed = 0;  // Note: seed is UINT16 but flash buff works with UINT8
+    for( i=0; i < lenn; i++ ) {
+      ReadDataFlash(addrn+i,1,&buffn[i]);
+    }
+    // create the seed number from the flash data
+    seed = *(UINT16*)&buffn;        // Reads the 2 bytes of buffn array into seed
 
     // Get some random numbers for die results
     // srand seeds the random
-    srand(buffn);
+    srand(seed);
 
     // rand() % 6 = 0-5, add 1 to make it 1-6
     d6value[0] = (rand() % 6) + 1;
@@ -152,10 +165,12 @@ void main() {
     d6value[2] = (rand() % 6) + 1;
 
     // generate a new random seed
-    buffn = (rand() % 256);
-
+    seed = rand();
+    *(UINT16*)&buffn = seed;        // Writes the 2 bytes of seed into buffn array
     // Write seed to data flash
-    WriteDataFlash(addrn,&buffn,lenn);
+    for( i=0; i < lenn; i++ ) {
+      WriteDataFlash(addrn+i,&buffn[i],1);
+    }
 
     // USB UDP/UDM I/O pin enable: 0=P3.6/P3.7 as GPIO, 1=P3.6/P3.7 as USB
     // Clear this bit to use D+/D- as GPIO 3.6/3.7
@@ -194,7 +209,7 @@ void main() {
       // *************
 
       // Animate die roll then display results one die at a time
-      for ( i; i < 13; i++ ) {
+      for ( i=0; i < 13; i++ ) {
         if ( i < 4 ) {                              // i = 0, 1, 2, 3
           // Initial roll - all dice at same speed
           rollani(1,1), rollani(2,2), rollani(3,3), mDelaymS(60);
@@ -242,14 +257,14 @@ void main() {
         }
       }
 
-      // Set i to 0 and Hold results steady for two seconds
-      i = 0, mDelaymS(2000);
+      // Set i to 0 and Hold results steady for three seconds
+      i = 0, mDelaymS(3000);
 
       // Start showing rolling animation again displaying same die results
       // Must reset or power cycle to get new die results
       while (TRUE) {
         randomdie = (rand() % 3) + 1; // Choose a die to roll, (rand()%3)+1 = 1-3
-        for ( i; i < 11; i++ ) {
+        for ( i=0; i < 11; i++ ) {
           if ( ( i >= 0 ) && ( i < 4 ) ) {          // i = 0, 1, 2, 3
             rollani(randomdie,1), mDelaymS(60);
             dieoff(randomdie);
@@ -280,7 +295,7 @@ void main() {
         }
 
         // Set i to 0 and Hold results steady for two seconds
-        i = 0, mDelaymS(2000);
+        i=0, mDelaymS(2000);
 
       }
 

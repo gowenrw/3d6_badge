@@ -54,4 +54,3 @@ void srand(unsigned int seed)
 {
     s = seed | 0x80000000; /* s shall not become 0 */
 }
-

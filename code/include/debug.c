@@ -7,29 +7,29 @@
                      CH554主频修改、延时函数定义
                      串口0和串口1初始化
                      串口0和串口1的收发子函数
-                     看门狗初始化										 
+                     看门狗初始化
 *******************************************************************************/
 
 #include <stdint.h>
 
-#include "ch554.h"
+#include "ch552.h"
 #include "debug.h"
 
 /*******************************************************************************
 * Function Name  : CfgFsys( )
 * Description    : CH554时钟选择和配置函数,默认使用Fsys 6MHz，FREQ_SYS可以通过
                    CLOCK_CFG配置得到，公式如下：
-                   Fsys = (Fosc * 4/(CLOCK_CFG & MASK_SYS_CK_SEL);具体时钟需要自己配置 
+                   Fsys = (Fosc * 4/(CLOCK_CFG & MASK_SYS_CK_SEL);具体时钟需要自己配置
 * Input          : None
 * Output         : None
 * Return         : None
-*******************************************************************************/ 
-void	CfgFsys( )  
+*******************************************************************************/
+void	CfgFsys( )
 {
 // 		SAFE_MOD = 0x55;
 // 		SAFE_MOD = 0xAA;
 //     CLOCK_CFG |= bOSC_EN_XT;                          //使能外部晶振
-//     CLOCK_CFG &= ~bOSC_EN_INT;                        //关闭内部晶振    
+//     CLOCK_CFG &= ~bOSC_EN_INT;                        //关闭内部晶振
 
 	SAFE_MOD = 0x55;
 	SAFE_MOD = 0xAA;
@@ -37,19 +37,19 @@ void	CfgFsys( )
 #if FREQ_SYS == 32000000
 	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x07;  // 32MHz
 #elif FREQ_SYS == 24000000
-	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x06;  // 24MHz	
+	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x06;  // 24MHz
 #elif FREQ_SYS == 16000000
-	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x05;  // 16MHz	
+	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x05;  // 16MHz
 #elif FREQ_SYS == 12000000
 	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x04;  // 12MHz
 #elif FREQ_SYS == 6000000
-	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x03;  // 6MHz	
+	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x03;  // 6MHz
 #elif FREQ_SYS == 3000000
-	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x02;  // 3MHz	
+	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x02;  // 3MHz
 #elif FREQ_SYS == 750000
-	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x01;  // 750KHz	
+	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x01;  // 750KHz
 #elif FREQ_SYS == 187500
-	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x00;  // 187.5MHz		
+	CLOCK_CFG = CLOCK_CFG & ~ MASK_SYS_CK_SEL | 0x00;  // 187.5MHz
 #else
 	#warning FREQ_SYS invalid or not set
 #endif
@@ -65,7 +65,7 @@ void	CfgFsys( )
 * Input          : UNIT16 n
 * Output         : None
 * Return         : None
-*******************************************************************************/ 
+*******************************************************************************/
 void	mDelayuS( uint16_t n )  // 以uS为单位延时
 {
 #ifdef	FREQ_SYS
@@ -135,7 +135,7 @@ void	mDelaymS( uint16_t n )                                                  // 
 #endif
 		-- n;
 	}
-}                                         
+}
 
 /*******************************************************************************
 * Function Name  : CH554UART0Alter()
