@@ -29,9 +29,14 @@ And thus the concept changed and the badge expanded into the GURPS player charac
 For those not familiar with GURPS: it is the Generic Universal Role Play System developed by Steve Jackson.
 You can get more information about it here: https://sjgames.com/gurps/
 
-# Details
+# Badge Kit
+
+If you are looking for what comes in the badge kit, those details are here: [3d6 Badge Kit](badgekit.md)
+
+# Badge Details
 
 The details of the badge including the PCB design files and firmware and artwork are all included in this repository.
+
 We will outline some of those details here.
 
 ## Silkscreen
