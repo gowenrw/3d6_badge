@@ -1,7 +1,12 @@
-Badge Flash Values Set
+Badge Flash Value First Roll Default
 0x0000 FF
 0x0001 19
-0x0002 Below:
+0x0002 15
+-----------------------------------------
+Badge Flash Value Set To (1st 224 badges)  
+0x0000 FF (Default)
+0x0001 19 (Default)
+0x0002 Set to Below:
 A0-AF
 B0-BF
 C0-CF
@@ -14,18 +19,30 @@ F0-FF
 50-5F
 60-6F
 70-7F
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-8A
-8B
+80-8F
+90-9F
+-----------------------------------------
+Badge Flash Value Set To (2nd 224 badges)  
+0x0000 FF (Default)
+0x0002 15 (Default)
+0x0001 Set to Below:
+A0-AF
+B0-BF
+C0-CF
+B0-BF
+D0-DF
+E0-EF
+F0
+F1
+F2
+F3
+F4
+F5
+F6
+
+
+
+
 
 
 
